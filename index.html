@@ -133,7 +133,7 @@ document.addEventListener('click',e=>{if(e.target.id=='modal'){close();return}co
 document.addEventListener('change',e=>{const a=e.target.closest('[data-act]');if(a&&(a.tagName=='SELECT'||a.type=='radio'||a.type=='checkbox'))acts[a.dataset.act]?.(a.dataset,a,e)});
 document.addEventListener('keydown',e=>{if(e.key=='Enter'&&(e.target.id=='lu'||e.target.id=='lp'))acts.login();if(e.key=='Escape')close()});
 /* Supabase: isi dua nilai ini dari Project Settings > API */
-const SUPABASE_URL='https://GANTI.supabase.co',SUPABASE_KEY='GANTI_ANON_KEY';
+const SUPABASE_URL='https://smzbhmivfxjeoizngrip.supabase.co',SUPABASE_KEY='sb_publishable_ZRp80vF-Ov2aJONuKphi2g_u81CHG0F';
 let sb=null;try{if(!SUPABASE_URL.includes('GANTI'))sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)}catch(e){}
 const DEF=JSON.parse(JSON.stringify({skus,Q,subs,gt,devs,fbs})),U2=u=>users.find(x=>x.u==u)?.id,I2=i=>users.find(x=>x.id==i)?.u,bykey=(a,k)=>Object.fromEntries(a.map(r=>[r[k],JSON.stringify(r)]));
 const TB=[
