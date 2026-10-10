@@ -133,7 +133,7 @@ document.addEventListener('click',e=>{if(e.target.id=='modal'){close();return}co
 document.addEventListener('change',e=>{const a=e.target.closest('[data-act]');if(a&&(a.tagName=='SELECT'||a.type=='radio'||a.type=='checkbox'))acts[a.dataset.act]?.(a.dataset,a,e)});
 document.addEventListener('keydown',e=>{if(e.key=='Enter'&&(e.target.id=='lu'||e.target.id=='lp'))acts.login();if(e.key=='Escape')close()});
 /* Supabase: isi dua nilai ini dari Project Settings > API */
-const SUPABASE_URL='https://smzbhmivfxjeoizngrip.supabase.co',SUPABASE_KEY='sb_publishable_ZRp80vF-Ov2aJONuKphi2g_u81CHG0F';
+const SUPABASE_URL='https://GANTI.supabase.co',SUPABASE_KEY='GANTI_ANON_KEY';
 let sb=null;try{if(!SUPABASE_URL.includes('GANTI'))sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)}catch(e){}
 const DEF=JSON.parse(JSON.stringify({skus,Q,gt})),U2=u=>users.find(x=>x.u==u)?.id,I2=i=>users.find(x=>x.id==i)?.u,bykey=(a,k)=>Object.fromEntries(a.map(r=>[r[k],JSON.stringify(r)]));
 const TB=[
@@ -188,7 +188,7 @@ let _si=null,_sr=null,_sn=-1;const sidx=()=>{if(_sr!==subs||_sn!==subs.length){_
 const usul=u=>RW.some(x=>x.user_id==u.id&&x.jenis=='usul'&&x.ke=='g'),fd=t=>new Date(t).toLocaleDateString('id-ID');
 function prg(u){if(u.r=='cb'||u.r=='b'){const l=tlist(u),m=sidx(),a=l.filter(s=>m.get(u.u+'|'+s.id)?.st=='ok').length;return{a,b:l.length,ok:l.length>0&&a==l.length,t:`SKU ${a}/${l.length}`}}
 if(u.r=='cg'){const a=gt.filter(t=>t.d[u.u]).length;return{a,b:gt.length,ok:gt.length>0&&a==gt.length,t:`Checklist ${a}/${gt.length}`}}
-const r=RW.find(x=>x.user_id==u.id&&x.jenis=='tetap'&&x.ke=='l'),ok=!r||Date.now()-new Date(r.tgl)>90*864e5;return{a:ok?1:0,b:1,ok,t:ok?'Masa latihan 3 bulan terpenuhi':'Berlatih min. 3 bulan sejak Laksana'}}
+return{a:1,b:1,ok:true,t:'Tanpa syarat tambahan'}}
 function penetapan(){const rows=users.filter(u=>NXT[u.r]).map(u=>({u,p:prg(u)})).sort((a,b)=>b.p.ok-a.p.ok),sh=rows.slice(0,200);
 return`<h1>Penetapan Tingkatan</h1><p class="mut">Peserta yang memenuhi syarat dapat ditetapkan naik tingkat. Syarat dicek ulang oleh server. Pramuka Garuda: Pembina mengusulkan, Admin (Kwarcab) menetapkan.</p><div class="card tw"><table><tr><th>Peserta</th><th>Tingkat</th><th>Syarat</th><th></th></tr>${sh.map(({u,p})=>{const us=usul(u),act=!p.ok?'<span class="bd mut">Belum</span>':u.r=='cg'?(me.r=='ad'?(us?`<button class="btn sm pri" data-act="tp" data-u="${u.u}">Tetapkan Garuda</button>`:'<span class="bd wait">Menunggu usulan</span>'):us?'<span class="bd wait">Diusulkan ke Kwarcab</span>':`<button class="btn sm pri" data-act="us" data-u="${u.u}">Usulkan ke Kwarcab</button>`):`<button class="btn sm pri" data-act="tp" data-u="${u.u}">Tetapkan</button>`;
 return`<tr><td>${esc(u.n)}<br><small class="mut">${esc(u.k)} / ${esc(u.s)}</small></td><td>${ROLES[u.r]}<br><small class="mut">→ ${ROLES[NXT[u.r]]}</small></td><td><small>${p.t}</small><div class="pg"><i style="width:${p.b?p.a/p.b*100:0}%"></i></div></td><td>${act}</td></tr>`}).join('')||'<tr><td colspan=4 class="mut">Belum ada peserta.</td></tr>'}</table>${rows.length>200?`<p class="mut"><small>Menampilkan 200 dari ${rows.length}. Yang siap ditetapkan selalu di urutan teratas.</small></p>`:''}</div>
